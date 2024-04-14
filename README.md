@@ -29,3 +29,38 @@ pnpm add -D ts-declaration-location
 # Install with yarn
 yarn add -D ts-declaration-location
 ```
+
+## Usage Example
+
+<!-- eslint-disable import/order -->
+
+```ts
+import typeMatchesSpecifier from "ts-declaration-location";
+import type ts from "typescript";
+
+function isTypeFromSomePackage(program: ts.Program, type: ts.Type) {
+  const specifier = {
+    from: "package",
+    package: "some-package"
+  };
+
+  return typeMatchesSpecifier(program, specifier, type);
+}
+
+function isTypeFromSomeFile(program: ts.Program, type: ts.Type) {
+  const specifier = {
+    from: "file",
+    path: "src/**/some.ts"
+  };
+
+  return typeMatchesSpecifier(program, specifier, type);
+}
+
+function isTypeFromTSLib(program: ts.Program, type: ts.Type) {
+  const specifier = {
+    from: "lib",
+  };
+
+  return typeMatchesSpecifier(program, specifier, type);
+}
+```
