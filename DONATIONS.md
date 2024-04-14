@@ -4,7 +4,7 @@ Any donations would be much appreciated. 😄
 
 ## Enterprise Users
 
-`template-typescript-node-package` is available as part of the [Tidelift Subscription](https://tidelift.com/subscription/pkg/npm-template-typescript-node-package).
+`ts-declaration-location` is available as part of the [Tidelift Subscription](https://tidelift.com/subscription/pkg/npm-ts-declaration-location).
 
 ## Real money
 
