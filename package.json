@@ -55,7 +55,7 @@
     "type-check": "tsc --noEmit -p tsconfig.build.json"
   },
   "dependencies": {
-    "fast-glob": "^3.3.2"
+    "minimatch": "^9.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "19.2.1",

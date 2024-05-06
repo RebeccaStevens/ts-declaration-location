@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-import glob from "fast-glob";
+import { minimatch } from "minimatch";
 import ts from "typescript";
 
 import { type TypeDeclarationSpecifier } from "./types";
@@ -104,34 +104,32 @@ function isTypeDeclaredInLocalFile(
   declarationFiles: ReadonlyArray<ts.SourceFile>,
   globPattern?: string,
 ): boolean {
-  if (globPattern === undefined) {
-    const cwd = program.getCurrentDirectory();
-    const typeRoots = ts.getEffectiveTypeRoots(
-      program.getCompilerOptions(),
-      program,
-    );
+  const cwd = program.getCurrentDirectory();
+  const typeRoots = ts.getEffectiveTypeRoots(
+    program.getCompilerOptions(),
+    program,
+  );
 
-    return declarationFiles.some((declaration) => {
-      if (program.isSourceFileFromExternalLibrary(declaration)) {
-        return false;
-      }
-      const fileName = declaration.path;
-      if (!fileName.startsWith(cwd)) {
-        return false;
-      }
-      return (
-        typeRoots?.some((typeRoot) => fileName.startsWith(typeRoot)) !== true
-      );
-    });
+  // Filter out type roots.
+  const filteredDeclarationFiles =
+    typeRoots === undefined
+      ? declarationFiles
+      : declarationFiles.filter(
+          (declaration) =>
+            !typeRoots.some((typeRoot) =>
+              declaration.path.startsWith(typeRoot),
+            ),
+        );
+
+  if (globPattern === undefined) {
+    return filteredDeclarationFiles.some(
+      (declaration) => !declaration.path.includes("/node_modules/"),
+    );
   }
 
-  return glob
-    .sync(globPattern, {
-      cwd: program.getCurrentDirectory(),
-      absolute: true,
-      dot: true,
-    })
-    .some((match) =>
-      declarationFiles.some((declaration) => match === declaration.fileName),
-    );
+  return filteredDeclarationFiles.some(
+    (declaration) =>
+      declaration.path.startsWith(cwd) &&
+      minimatch(declaration.path, globPattern),
+  );
 }
