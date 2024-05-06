@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+## [1.0.1](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.0...v1.0.1) (2024-05-06)
+
+
+### Bug Fixes
+
+* how testing if a type is a from a local file is done ([3312d1c](https://github.com/RebeccaStevens/ts-declaration-location/commit/3312d1c50547c352764103cdd5b72be8fbadac49))
+
 # 1.0.0 (2024-04-14)
 
 
