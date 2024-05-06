@@ -32,7 +32,7 @@ yarn add -D ts-declaration-location
 
 ## Usage Example
 
-<!-- eslint-disable import/order -->
+<!-- eslint-disable import/order, import/no-extraneous-dependencies -->
 
 ```ts
 import typeMatchesSpecifier from "ts-declaration-location";
