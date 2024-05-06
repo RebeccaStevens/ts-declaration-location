@@ -25,7 +25,7 @@ export function typeMatchesSpecifier(
     }
 
     case "lib": {
-      return isTypeDeclaredInTSLib(program, declarationFiles);
+      return isTypeDeclaredInDefaultLib(program, declarationFiles);
     }
 
     case "package": {
@@ -54,9 +54,9 @@ function getDeclarationFiles(type: Readonly<ts.Type>) {
 }
 
 /**
- * Test if the type is declared in a TypeScript lib.
+ * Test if the type is declared in a TypeScript default lib.
  */
-function isTypeDeclaredInTSLib(
+function isTypeDeclaredInDefaultLib(
   program: ts.Program,
   declarationFiles: ReadonlyArray<ts.SourceFile>,
 ): boolean {
