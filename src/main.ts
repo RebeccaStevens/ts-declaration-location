@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import * as path from "node:path";
 
 import { minimatch } from "minimatch";
 import ts from "typescript";
@@ -13,28 +14,32 @@ export function typeMatchesSpecifier(
   specifier: Readonly<TypeDeclarationSpecifier>,
   type: Readonly<ts.Type>,
 ): boolean {
-  const declarationFiles = getDeclarationFiles(type);
+  const [declarations, declarationFiles] = getDeclarations(type);
 
   switch (specifier.from) {
-    case "file": {
-      return isTypeDeclaredInLocalFile(
-        program,
-        declarationFiles,
-        specifier.path,
-      );
-    }
-
     case "lib": {
       return isTypeDeclaredInDefaultLib(program, declarationFiles);
     }
 
     case "package": {
-      return isTypeDeclaredInPackage(
-        program,
-        declarationFiles,
-        specifier.package,
+      return (
+        isTypeDeclaredInPackage(
+          program,
+          declarations,
+          declarationFiles,
+          specifier.package,
+        ) && !isTypeDeclaredInDefaultLib(program, declarationFiles)
       );
     }
+
+    case "file": {
+      return (
+        isTypeDeclaredInLocalFile(program, declarationFiles, specifier.path) &&
+        !isTypeDeclaredInDefaultLib(program, declarationFiles) &&
+        !isTypeDeclaredInPackage(program, declarations, declarationFiles)
+      );
+    }
+
     default: {
       assert.fail();
     }
@@ -44,13 +49,15 @@ export function typeMatchesSpecifier(
 /**
  * Get the source files that declare the type.
  */
-function getDeclarationFiles(type: Readonly<ts.Type>) {
-  return (
-    type
-      .getSymbol()
-      ?.getDeclarations()
-      ?.map((declaration) => declaration.getSourceFile()) ?? []
+function getDeclarations(
+  type: Readonly<ts.Type>,
+): [ts.Declaration[], ts.SourceFile[]] {
+  const declarations = type.getSymbol()?.getDeclarations() ?? [];
+  const declarationFiles = declarations.map((declaration) =>
+    declaration.getSourceFile(),
   );
+
+  return [declarations, declarationFiles];
 }
 
 /**
@@ -70,9 +77,44 @@ function isTypeDeclaredInDefaultLib(
 }
 
 /**
- * Test if the type is declared in a TypeScript package.
+ * Test if the type is declared in a package.
  */
 function isTypeDeclaredInPackage(
+  program: ts.Program,
+  declarations: Readonly<ts.Node[]>,
+  declarationFiles: Readonly<ts.SourceFile[]>,
+  packageName?: string,
+): boolean {
+  return (
+    isTypeDeclaredInDeclareModule(declarations, packageName) ||
+    isTypeDeclaredInPackageDeclarationFile(
+      program,
+      declarationFiles,
+      packageName,
+    )
+  );
+}
+
+/**
+ * Test if the type is declared in a declare module.
+ */
+function isTypeDeclaredInDeclareModule(
+  declarations: Readonly<ts.Node[]>,
+  packageName?: string,
+): boolean {
+  return declarations.some((declaration) => {
+    const moduleDeclaration = findParentModuleDeclaration(declaration);
+    return (
+      moduleDeclaration !== undefined &&
+      (packageName === undefined || moduleDeclaration.name.text === packageName)
+    );
+  });
+}
+
+/**
+ * Test if the type is declared in a TypeScript Declaration file of a package.
+ */
+function isTypeDeclaredInPackageDeclarationFile(
   program: ts.Program,
   declarationFiles: ReadonlyArray<ts.SourceFile>,
   packageName?: string,
@@ -127,9 +169,49 @@ function isTypeDeclaredInLocalFile(
     );
   }
 
-  return filteredDeclarationFiles.some(
-    (declaration) =>
-      declaration.path.startsWith(cwd) &&
-      minimatch(declaration.path, globPattern),
-  );
+  return filteredDeclarationFiles.some((declaration) => {
+    const canonicalPath = getCanonicalFilePath(declaration.path);
+    return (
+      canonicalPath.startsWith(cwd) && minimatch(canonicalPath, globPattern)
+    );
+  });
+}
+
+/**
+ * Search up the tree for a module declaration.
+ */
+function findParentModuleDeclaration(
+  node: ts.Node,
+): ts.ModuleDeclaration | undefined {
+  switch (node.kind) {
+    case ts.SyntaxKind.ModuleDeclaration: {
+      return node as ts.ModuleDeclaration;
+    }
+    case ts.SyntaxKind.SourceFile: {
+      return undefined;
+    }
+    default: {
+      return findParentModuleDeclaration(node.parent);
+    }
+  }
+}
+
+/**
+ * Clean up a file path so it can be matched against as users expect.
+ */
+function getCanonicalFilePath(filePath: string) {
+  const normalized = path.normalize(filePath);
+  const normalizedWithoutTrailingSlash = normalized.endsWith(path.sep)
+    ? normalized.slice(0, -1)
+    : normalized;
+
+  const useCaseSensitiveFileNames =
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    ts.sys === undefined ? true : ts.sys.useCaseSensitiveFileNames;
+
+  if (useCaseSensitiveFileNames) {
+    return normalizedWithoutTrailingSlash;
+  }
+
+  return normalizedWithoutTrailingSlash.toLowerCase();
 }
