@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+## [1.0.3](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.2...v1.0.3) (2024-07-19)
+
+
+### Bug Fixes
+
+* handling of global module declarations ([45e884c](https://github.com/RebeccaStevens/ts-declaration-location/commit/45e884c7b58b31bc139a5cff28d96ebcc7434462))
+
 ## [1.0.2](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.1...v1.0.2) (2024-07-06)
 
 
