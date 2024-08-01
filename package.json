@@ -55,7 +55,7 @@
     "type-check": "tsc --noEmit -p tsconfig.build.json"
   },
   "dependencies": {
-    "minimatch": "^9.0.0"
+    "minimatch": "^10.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
