@@ -208,7 +208,7 @@ function getCanonicalFilePath(filePath: string) {
     : normalized;
 
   const useCaseSensitiveFileNames =
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    // eslint-disable-next-line ts/no-unnecessary-condition
     ts.sys === undefined ? true : ts.sys.useCaseSensitiveFileNames;
 
   if (useCaseSensitiveFileNames) {

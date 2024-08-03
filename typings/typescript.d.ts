@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-unassigned-import, unicorn/import-style
+// eslint-disable-next-line unicorn/import-style
 import "typescript";
 
 declare module "typescript" {

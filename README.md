@@ -41,7 +41,7 @@ import type ts from "typescript";
 function isTypeFromSomePackage(program: ts.Program, type: ts.Type) {
   const specifier = {
     from: "package",
-    package: "some-package"
+    package: "some-package",
   };
 
   return typeMatchesSpecifier(program, specifier, type);
@@ -50,7 +50,7 @@ function isTypeFromSomePackage(program: ts.Program, type: ts.Type) {
 function isTypeFromSomeFile(program: ts.Program, type: ts.Type) {
   const specifier = {
     from: "file",
-    path: "src/**/some.ts"
+    path: "src/**/some.ts",
   };
 
   return typeMatchesSpecifier(program, specifier, type);
