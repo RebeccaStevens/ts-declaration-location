@@ -23,12 +23,8 @@ export function typeMatchesSpecifier(
 
     case "package": {
       return (
-        isTypeDeclaredInPackage(
-          program,
-          declarations,
-          declarationFiles,
-          specifier.package,
-        ) && !isTypeDeclaredInDefaultLib(program, declarationFiles)
+        isTypeDeclaredInPackage(program, declarations, declarationFiles, specifier.package) &&
+        !isTypeDeclaredInDefaultLib(program, declarationFiles)
       );
     }
 
@@ -49,13 +45,9 @@ export function typeMatchesSpecifier(
 /**
  * Get the source files that declare the type.
  */
-function getDeclarations(
-  type: Readonly<ts.Type>,
-): [ts.Declaration[], ts.SourceFile[]] {
+function getDeclarations(type: Readonly<ts.Type>): [ts.Declaration[], ts.SourceFile[]] {
   const declarations = type.getSymbol()?.getDeclarations() ?? [];
-  const declarationFiles = declarations.map((declaration) =>
-    declaration.getSourceFile(),
-  );
+  const declarationFiles = declarations.map((declaration) => declaration.getSourceFile());
 
   return [declarations, declarationFiles];
 }
@@ -63,17 +55,12 @@ function getDeclarations(
 /**
  * Test if the type is declared in a TypeScript default lib.
  */
-function isTypeDeclaredInDefaultLib(
-  program: ts.Program,
-  declarationFiles: ReadonlyArray<ts.SourceFile>,
-): boolean {
+function isTypeDeclaredInDefaultLib(program: ts.Program, declarationFiles: ReadonlyArray<ts.SourceFile>): boolean {
   // Intrinsic type (i.e. string, number, boolean, etc).
   if (declarationFiles.length === 0) {
     return true;
   }
-  return declarationFiles.some((declaration) =>
-    program.isSourceFileDefaultLibrary(declaration),
-  );
+  return declarationFiles.some((declaration) => program.isSourceFileDefaultLibrary(declaration));
 }
 
 /**
@@ -87,26 +74,18 @@ function isTypeDeclaredInPackage(
 ): boolean {
   return (
     isTypeDeclaredInDeclareModule(declarations, packageName) ||
-    isTypeDeclaredInPackageDeclarationFile(
-      program,
-      declarationFiles,
-      packageName,
-    )
+    isTypeDeclaredInPackageDeclarationFile(program, declarationFiles, packageName)
   );
 }
 
 /**
  * Test if the type is declared in a declare module.
  */
-function isTypeDeclaredInDeclareModule(
-  declarations: Readonly<ts.Node[]>,
-  packageName?: string,
-): boolean {
+function isTypeDeclaredInDeclareModule(declarations: Readonly<ts.Node[]>, packageName?: string): boolean {
   return declarations.some((declaration) => {
     const moduleDeclaration = findParentModuleDeclaration(declaration);
     return (
-      moduleDeclaration !== undefined &&
-      (packageName === undefined || moduleDeclaration.name.text === packageName)
+      moduleDeclaration !== undefined && (packageName === undefined || moduleDeclaration.name.text === packageName)
     );
   });
 }
@@ -125,8 +104,7 @@ function isTypeDeclaredInPackageDeclarationFile(
   const matcher =
     packageName === undefined
       ? undefined
-      : (assert(typesPackageName !== undefined),
-        new RegExp(`${packageName}|${typesPackageName}`, "u"));
+      : (assert(typesPackageName !== undefined), new RegExp(`${packageName}|${typesPackageName}`, "u"));
 
   return declarationFiles.some((declaration) => {
     const packageIdName = program.sourceFileToPackageName.get(declaration.path);
@@ -147,47 +125,31 @@ function isTypeDeclaredInLocalFile(
   globPattern?: string,
 ): boolean {
   const cwd = program.getCurrentDirectory();
-  const typeRoots = ts.getEffectiveTypeRoots(
-    program.getCompilerOptions(),
-    program,
-  );
+  const typeRoots = ts.getEffectiveTypeRoots(program.getCompilerOptions(), program);
 
   // Filter out type roots.
   const filteredDeclarationFiles =
     typeRoots === undefined
       ? declarationFiles
-      : declarationFiles.filter(
-          (declaration) =>
-            !typeRoots.some((typeRoot) =>
-              declaration.path.startsWith(typeRoot),
-            ),
-        );
+      : declarationFiles.filter((declaration) => !typeRoots.some((typeRoot) => declaration.path.startsWith(typeRoot)));
 
   if (globPattern === undefined) {
-    return filteredDeclarationFiles.some(
-      (declaration) => !declaration.path.includes("/node_modules/"),
-    );
+    return filteredDeclarationFiles.some((declaration) => !declaration.path.includes("/node_modules/"));
   }
 
   return filteredDeclarationFiles.some((declaration) => {
     const canonicalPath = getCanonicalFilePath(declaration.path);
-    return (
-      canonicalPath.startsWith(cwd) && minimatch(canonicalPath, globPattern)
-    );
+    return canonicalPath.startsWith(cwd) && minimatch(canonicalPath, globPattern);
   });
 }
 
 /**
  * Search up the tree for a module declaration.
  */
-function findParentModuleDeclaration(
-  node: ts.Node,
-): ts.ModuleDeclaration | undefined {
+function findParentModuleDeclaration(node: ts.Node): ts.ModuleDeclaration | undefined {
   switch (node.kind) {
     case ts.SyntaxKind.ModuleDeclaration: {
-      return ts.isStringLiteral((node as ts.ModuleDeclaration).name)
-        ? (node as ts.ModuleDeclaration)
-        : undefined;
+      return ts.isStringLiteral((node as ts.ModuleDeclaration).name) ? (node as ts.ModuleDeclaration) : undefined;
     }
     case ts.SyntaxKind.SourceFile: {
       return undefined;
@@ -203,9 +165,7 @@ function findParentModuleDeclaration(
  */
 function getCanonicalFilePath(filePath: string) {
   const normalized = path.normalize(filePath);
-  const normalizedWithoutTrailingSlash = normalized.endsWith(path.sep)
-    ? normalized.slice(0, -1)
-    : normalized;
+  const normalizedWithoutTrailingSlash = normalized.endsWith(path.sep) ? normalized.slice(0, -1) : normalized;
 
   const useCaseSensitiveFileNames =
     // eslint-disable-next-line ts/no-unnecessary-condition

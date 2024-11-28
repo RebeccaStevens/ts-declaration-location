@@ -1,16 +1,21 @@
-import rollupPluginReplace from "@rollup/plugin-replace";
-import { rollupPlugin as rollupPluginDeassert } from "deassert";
+import rollupPluginTypescript from "@rollup/plugin-typescript";
 import type { RollupOptions } from "rollup";
-import rollupPluginTs from "rollup-plugin-ts";
+import rollupPluginDeassert from "rollup-plugin-deassert";
+import generateDtsBundle from "rollup-plugin-dts-bundle-generator-2";
 
 import pkg from "./package.json" with { type: "json" };
 
+type PackageJSON = typeof pkg & {
+  dependencies?: Record<string, string>;
+  peerDependencies?: Record<string, string>;
+};
+
 const externalDependencies = [
-  ...Object.keys((pkg as any).dependencies ?? {}),
-  ...Object.keys((pkg as any).peerDependencies ?? {}),
+  ...Object.keys((pkg as PackageJSON).dependencies),
+  ...Object.keys((pkg as PackageJSON).peerDependencies),
 ];
 
-const library = {
+export default {
   input: "src/index.ts",
 
   output: [
@@ -26,26 +31,15 @@ const library = {
     },
   ],
 
-  external: (source) => {
-    if (externalDependencies.some((dep) => source.startsWith(dep))) {
-      return true;
-    }
-    return undefined;
-  },
-
   plugins: [
-    rollupPluginTs({
-      transpileOnly: true,
+    rollupPluginTypescript({
       tsconfig: "tsconfig.build.json",
-    }),
-    rollupPluginReplace({
-      values: {
-        "import.meta.vitest": "undefined",
-      },
-      preventAssignment: true,
     }),
     rollupPluginDeassert({
       include: ["**/*.{js,ts}"],
+    }),
+    generateDtsBundle({
+      preferredConfigPath: "tsconfig.build.json",
     }),
   ],
 
@@ -55,6 +49,11 @@ const library = {
     propertyReadSideEffects: false,
     unknownGlobalSideEffects: false,
   },
-} satisfies RollupOptions;
 
-export default [library];
+  external: (source) => {
+    if (source.startsWith("node:") || externalDependencies.some((dep) => source.startsWith(dep))) {
+      return true;
+    }
+    return undefined;
+  },
+} satisfies RollupOptions;

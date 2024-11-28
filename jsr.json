@@ -1,0 +1,8 @@
+{
+  "name": "@rebeccastevens/ts-declaration-location",
+  "version": "0.0.0-development",
+  "exports": "./src/index.ts",
+  "publish": {
+    "include": ["LICENSE", "README.md", "src/**/*.ts"]
+  }
+}

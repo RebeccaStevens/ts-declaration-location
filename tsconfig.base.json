@@ -4,10 +4,12 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "alwaysStrict": true,
+    "declaration": true,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": false,
+    "isolatedDeclarations": true,
     "lib": ["ESNext"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -26,10 +28,6 @@
     "sourceMap": false,
     "strict": true,
     "target": "ESNext",
-    "useUnknownInCatchVariables": true,
-    "types": ["vitest/importMeta"],
-    "baseUrl": ".",
-    "paths": {}
-  },
-  "exclude": ["dist/"]
+    "useUnknownInCatchVariables": true
+  }
 }

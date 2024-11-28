@@ -1,9 +1,10 @@
 {
-  "extends": "./tsconfig.build.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "allowJs": true,
     "noEmit": true,
     "rootDir": ".",
+    "declaration": false,
     "isolatedDeclarations": false
   },
   "include": [".", ".*"]
