@@ -139,7 +139,10 @@ function isTypeDeclaredInLocalFile(
 
   return filteredDeclarationFiles.some((declaration) => {
     const canonicalPath = getCanonicalFilePath(declaration.path);
-    return canonicalPath.startsWith(cwd) && minimatch(canonicalPath, globPattern);
+    return (
+      canonicalPath.startsWith(cwd) &&
+      (minimatch(canonicalPath, globPattern) || minimatch(`./${path.relative(cwd, canonicalPath)}`, globPattern))
+    );
   });
 }
 
