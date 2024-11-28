@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+## [1.0.5](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.4...v1.0.5) (2024-11-28)
+
+
+### Bug Fixes
+
+* support relative globs ([#56](https://github.com/RebeccaStevens/ts-declaration-location/issues/56)) ([bec326d](https://github.com/RebeccaStevens/ts-declaration-location/commit/bec326d961f8ba91cb6f697df5d2d1701c8a11f3))
+
 ## [1.0.4](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.3...v1.0.4) (2024-08-01)
 
 ## [1.0.3](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.2...v1.0.3) (2024-07-19)
