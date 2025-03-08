@@ -70,7 +70,7 @@
     "typecheck": "tsc -p tsconfig.build.json --noEmit"
   },
   "dependencies": {
-    "minimatch": "^10.0.1"
+    "minimatch": "^9.0.5"
   },
   "devDependencies": {
     "@commitlint/cli": "19.6.1",

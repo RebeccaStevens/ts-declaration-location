@@ -55,6 +55,10 @@
       "rangeStrategy": "replace",
       "semanticCommitScope": "dev-deps",
       "semanticCommitType": "ci"
+    },
+    {
+      "matchDepNames": ["minimatch"],
+      "allowedVersions": "<10.0.0"
     }
   ]
 }
