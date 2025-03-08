@@ -4,7 +4,7 @@ import * as path from "node:path";
 import { minimatch } from "minimatch";
 import ts from "typescript";
 
-import type { TypeDeclarationSpecifier } from "./types";
+import type { TypeDeclarationSpecifier } from "./types.ts";
 
 /**
  * Test if the type matches the given specifier.

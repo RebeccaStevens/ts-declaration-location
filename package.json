@@ -44,15 +44,13 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript --configImportAttributesKey with",
     "cz": "git-cz",
     "lint": "eslint && pnpm run lint:md && pnpm run lint:spelling && pnpm run lint:knip && pnpm run lint:packages",
     "lint-fix": "eslint --fix && pnpm run lint:md-fix && pnpm run lint:packages-fix",
     "lint:js": "eslint \"**/*.?([cm])[jt]s?(x)\"",
     "lint:js-fix": "eslint \"**/*.?([cm])[jt]s?(x)\" --fix",
-    "lint:knip": "pnpm run lint:knip:development && pnpm run lint:knip:production",
-    "lint:knip:development": "knip",
-    "lint:knip:production": "knip --production",
+    "lint:knip": "knip",
     "lint:md": "markdownlint-cli2",
     "lint:md-fix": "markdownlint-cli2 --fix",
     "lint:md-full": "pnpm run lint:md && eslint \"**/*.md\"",
@@ -67,7 +65,9 @@
     "test": "pnpm run test:js",
     "test:js": "vitest --coverage",
     "test:js-run": "vitest run --coverage",
-    "typecheck": "tsc -p tsconfig.build.json --noEmit"
+    "typecheck": "pnpm run typecheck:root && pnpm run typecheck:src",
+    "typecheck:root": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck:src": "tsc -p ./src/tsconfig.json --noEmit"
   },
   "dependencies": {
     "minimatch": "^9.0.5"

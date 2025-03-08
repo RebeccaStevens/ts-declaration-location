@@ -1,7 +1,7 @@
-export { typeMatchesSpecifier as default } from "./main";
+export { typeMatchesSpecifier as default } from "./main.ts";
 export {
   type TypeDeclarationFileSpecifier,
   type TypeDeclarationLibSpecifier,
   type TypeDeclarationPackageSpecifier,
   type TypeDeclarationSpecifier,
-} from "./types";
+} from "./types.ts";
