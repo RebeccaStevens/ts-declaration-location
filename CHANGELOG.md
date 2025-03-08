@@ -1,6 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+## [1.0.6](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.5...v1.0.6) (2025-03-08)
+
 ## [1.0.5](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.4...v1.0.5) (2024-11-28)
 
 
