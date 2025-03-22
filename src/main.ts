@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import * as path from "node:path";
 
-import { minimatch } from "minimatch";
+import pm from "picomatch";
 import ts from "typescript";
 
 import type { TypeDeclarationSpecifier } from "./types.ts";
@@ -141,7 +141,7 @@ function isTypeDeclaredInLocalFile(
     const canonicalPath = getCanonicalFilePath(declaration.path);
     return (
       canonicalPath.startsWith(cwd) &&
-      (minimatch(canonicalPath, globPattern) || minimatch(`./${path.relative(cwd, canonicalPath)}`, globPattern))
+      (pm.isMatch(canonicalPath, globPattern) || pm.isMatch(`./${path.relative(cwd, canonicalPath)}`, globPattern))
     );
   });
 }
