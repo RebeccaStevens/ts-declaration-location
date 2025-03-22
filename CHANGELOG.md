@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+## [1.0.7](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.6...v1.0.7) (2025-03-22)
+
+
+### Performance Improvements
+
+* switch from `minimatch` to `picomatch` ([#80](https://github.com/RebeccaStevens/ts-declaration-location/issues/80)) ([ec26e28](https://github.com/RebeccaStevens/ts-declaration-location/commit/ec26e284a597280babaf926697b1b681bcffe485))
+
 ## [1.0.6](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.5...v1.0.6) (2025-03-08)
 
 ## [1.0.5](https://github.com/RebeccaStevens/ts-declaration-location/compare/v1.0.4...v1.0.5) (2024-11-28)
