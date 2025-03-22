@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      minimatch:
-        specifier: ^9.0.5
-        version: 9.0.5
+      picomatch:
+        specifier: ^4.0.2
+        version: 4.0.2
     devDependencies:
       '@commitlint/cli':
         specifier: 19.8.0
@@ -57,6 +57,9 @@ importers:
       '@types/node':
         specifier: 22.13.10
         version: 22.13.10
+      '@types/picomatch':
+        specifier: ^3.0.2
+        version: 3.0.2
       '@typescript-eslint/eslint-plugin':
         specifier: 8.26.0
         version: 8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2)
@@ -1245,6 +1248,9 @@ packages:
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
+
+  '@types/picomatch@3.0.2':
+    resolution: {integrity: sha512-n0i8TD3UDB7paoMMxA3Y65vUncFJXjcUf7lQY7YyKGl6031FNjfsLs6pdLFCy2GNFxItPJG8GvvpbZc2skH7WA==}
 
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
@@ -5655,6 +5661,8 @@ snapshots:
       undici-types: 6.20.0
 
   '@types/normalize-package-data@2.4.4': {}
+
+  '@types/picomatch@3.0.2': {}
 
   '@types/semver@7.5.8': {}
 
