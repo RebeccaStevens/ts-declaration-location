@@ -26,7 +26,7 @@ importers:
         version: 2.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.4.2))
       '@rebeccastevens/eslint-config':
         specifier: 3.8.0
-        version: 3.8.0(3ceed0cd67f54a948ce77bf35f34cef5)
+        version: 3.8.0(8771b73d61eba4bc5e6098f1f07a1fd6)
       '@rollup/plugin-typescript':
         specifier: 12.1.4
         version: 12.1.4(rollup@4.59.0)(tslib@2.8.1)(typescript@5.9.2)
@@ -148,8 +148,8 @@ importers:
         specifier: 9.1.7
         version: 9.1.7
       jsonc-eslint-parser:
-        specifier: 2.4.0
-        version: 2.4.0
+        specifier: 3.1.0
+        version: 3.1.0
       knip:
         specifier: 5.62.0
         version: 5.62.0(@types/node@22.17.0)(typescript@5.9.2)
@@ -3625,10 +3625,6 @@ packages:
     resolution: {integrity: sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA==}
     hasBin: true
 
-  jsonc-eslint-parser@2.4.0:
-    resolution: {integrity: sha512-WYDyuc/uFcGp6YtM2H0uKmUwieOuzeE/5YocFJLnLfclZ4inf3mRn8ZVy1s7Hxji7Jxm6Ss8gqpexD/GlKoGgg==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
   jsonc-eslint-parser@3.1.0:
     resolution: {integrity: sha512-75EA7EWZExL/j+MDKQrRbdzcRI2HOkRlmUw8fZJc1ioqFEOvBsq7Rt+A6yCxOt9w/TYNpkt52gC6nm/g5tFIng==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
@@ -6229,7 +6225,7 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@rebeccastevens/eslint-config@3.8.0(3ceed0cd67f54a948ce77bf35f34cef5)':
+  '@rebeccastevens/eslint-config@3.8.0(8771b73d61eba4bc5e6098f1f07a1fd6)':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@clack/prompts': 0.11.0
@@ -6264,7 +6260,7 @@ snapshots:
       eslint-plugin-sonarjs: 3.0.4(eslint@9.26.0(hono@4.11.7)(jiti@2.4.2))
       eslint-plugin-unicorn: 63.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.4.2))
       eslint-plugin-yml: 3.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.4.2))
-      jsonc-eslint-parser: 2.4.0
+      jsonc-eslint-parser: 3.1.0
       prettier: 3.6.2
       sort-package-json: 2.10.0
       vue-eslint-parser: 9.4.3(eslint@9.26.0(hono@4.11.7)(jiti@2.4.2))
@@ -8117,6 +8113,7 @@ snapshots:
       acorn: 8.15.0
       acorn-jsx: 5.3.2(acorn@8.15.0)
       eslint-visitor-keys: 3.4.3
+    optional: true
 
   esprima@4.0.1: {}
 
@@ -9016,13 +9013,6 @@ snapshots:
     dependencies:
       minimist: 1.2.8
     optional: true
-
-  jsonc-eslint-parser@2.4.0:
-    dependencies:
-      acorn: 8.15.0
-      eslint-visitor-keys: 3.4.3
-      espree: 9.6.1
-      semver: 7.7.4
 
   jsonc-eslint-parser@3.1.0:
     dependencies:
