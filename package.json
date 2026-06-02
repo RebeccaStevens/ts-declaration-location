@@ -73,8 +73,8 @@
     "picomatch": "^4.0.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "20.1.0",
-    "@commitlint/config-conventional": "20.0.0",
+    "@commitlint/cli": "21.0.2",
+    "@commitlint/config-conventional": "21.0.2",
     "@cspell/dict-cryptocurrencies": "5.0.5",
     "@eslint/compat": "2.0.0",
     "@rebeccastevens/eslint-config": "3.8.0",
