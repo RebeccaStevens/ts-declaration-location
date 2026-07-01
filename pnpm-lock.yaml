@@ -31,8 +31,8 @@ importers:
         specifier: 12.1.4
         version: 12.1.4(rollup@4.59.0)(tslib@2.8.1)(typescript@5.9.2)
       '@sebbo2002/semantic-release-jsr':
-        specifier: 3.0.1
-        version: 3.0.1
+        specifier: 4.0.1
+        version: 4.0.1
       '@semantic-release/changelog':
         specifier: 6.0.3
         version: 6.0.3(semantic-release@25.0.3(typescript@5.9.2))
@@ -1575,9 +1575,9 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@sebbo2002/semantic-release-jsr@3.0.1':
-    resolution: {integrity: sha512-0WC3RkQI7z6scAgu3k+vDRWdLHiD/4mW0IRkcYTxJ7crXK8PYb4teemQsZBDIAanTnvByfGOk7O9adsWA3QCRw==}
-    engines: {node: 20 || >=22.0.0}
+  '@sebbo2002/semantic-release-jsr@4.0.1':
+    resolution: {integrity: sha512-W/qrTW6/JfSvfS3YKxX0GGaekYtObJKYRkACfu2/3lBT5iTp1ZnTOoFpNus8JuwGLPVy4oB5M+LEhHzYjn5lHQ==}
+    engines: {node: 22 || >=24.0.0}
 
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
@@ -3229,6 +3229,7 @@ packages:
   git-raw-commits@5.0.1:
     resolution: {integrity: sha512-Y+csSm2GD/PCSh6Isd/WiMjNAydu0VBiG9J7EdQsNA5P9uXvLayqjmTsNlK5Gs9IhblFZqOU0yid5Il5JPoLiQ==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   glob-parent@5.1.2:
@@ -3784,8 +3785,8 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
-  jsr@0.13.5:
-    resolution: {integrity: sha512-qQP20ZcG28pYes7bCq3uuvixl1TL1EpJzwLPfoQadSyWk9j2AID66qhW8+aXpRDRFDvDkXFnONsSRhpnnQAupg==}
+  jsr@0.14.3:
+    resolution: {integrity: sha512-PGxnDepx7vwJoZQe2SHbyBiFfpGwsOKmX4kn/wZZqfMafV7fjXqTxSaX6lp9QHYkSTLKkER+P/wmrZY3gVJNzg==}
     hasBin: true
 
   jsx-ast-utils@3.3.5:
@@ -5116,6 +5117,7 @@ packages:
   tsconfck@3.1.1:
     resolution: {integrity: sha512-00eoI6WY57SvZEVjm13stEVE90VkEdJAFGgpFLTsZbJyW/LwFQ7uQxJHWpZ2hzSWgCPKc9AnBnNP+0X7o3hAmQ==}
     engines: {node: ^18 || >=20}
+    deprecated: unmaintained
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
@@ -6548,9 +6550,10 @@ snapshots:
   '@rtsao/scc@1.1.0':
     optional: true
 
-  '@sebbo2002/semantic-release-jsr@3.0.1':
+  '@sebbo2002/semantic-release-jsr@4.0.1':
     dependencies:
-      jsr: 0.13.5
+      '@semantic-release/error': 4.0.0
+      jsr: 0.14.3
 
   '@sec-ant/readable-stream@0.4.1': {}
 
@@ -9171,7 +9174,7 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  jsr@0.13.5:
+  jsr@0.14.3:
     dependencies:
       node-stream-zip: 1.15.0
       semiver: 1.1.0
