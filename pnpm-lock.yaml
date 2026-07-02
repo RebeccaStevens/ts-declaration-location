@@ -26,7 +26,7 @@ importers:
         version: 2.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
       '@rebeccastevens/eslint-config':
         specifier: 3.8.0
-        version: 3.8.0(07fd82b35b85c0d73602e9d3d7a21044)
+        version: 3.8.0(49d89398a4c58ba51bd4017f5686aaf8)
       '@rollup/plugin-typescript':
         specifier: 12.1.4
         version: 12.1.4(rollup@4.59.0)(tslib@2.8.1)(typescript@5.9.2)
@@ -103,8 +103,8 @@ importers:
         specifier: 2.0.1
         version: 2.0.1(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
       eslint-plugin-functional:
-        specifier: 9.0.2
-        version: 9.0.2(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2)
+        specifier: 10.0.0
+        version: 10.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2)
       eslint-plugin-import-x:
         specifier: 4.16.1
         version: 4.16.1(@typescript-eslint/utils@8.62.1(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
@@ -2782,11 +2782,11 @@ packages:
     peerDependencies:
       eslint: ^8.40.0 || ^9.0.0 || ^10.0.0
 
-  eslint-plugin-functional@9.0.2:
-    resolution: {integrity: sha512-N8kP9HX1CJ2HrufPHLzsKNJ81O1IB25jw2mxOc1H1z3CamEu8MYTn9dOo/FPfQwsqHZVuf7wyDCBcL8r8H7N0w==}
-    engines: {node: '>=v18.18.0'}
+  eslint-plugin-functional@10.0.0:
+    resolution: {integrity: sha512-D/BWdGUvPz5uIC+kZM1BWrELhjHpDiYxIYjzF7a6TZ62KINajjKgOiSYGbGv4fpMT1enEC9yG+0kOaIRTZzpTg==}
+    engines: {node: '>=v20.0.0'}
     peerDependencies:
-      eslint: ^9.0.0
+      eslint: ^9.0.0 || ^10.0.0
       typescript: '>=4.7.4'
     peerDependenciesMeta:
       typescript:
@@ -6414,7 +6414,7 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@rebeccastevens/eslint-config@3.8.0(07fd82b35b85c0d73602e9d3d7a21044)':
+  '@rebeccastevens/eslint-config@3.8.0(49d89398a4c58ba51bd4017f5686aaf8)':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@clack/prompts': 0.11.0
@@ -6434,7 +6434,7 @@ snapshots:
       eslint-merge-processors: 2.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
       eslint-plugin-eslint-comments: 3.2.0(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
       eslint-plugin-format: 2.0.1(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
-      eslint-plugin-functional: 9.0.2(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2)
+      eslint-plugin-functional: 10.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2)
       eslint-plugin-import-x: 4.16.1(@typescript-eslint/utils@8.62.1(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
       eslint-plugin-jsdoc: 63.0.1(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
       eslint-plugin-jsonc: 3.1.1(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))
@@ -7984,7 +7984,7 @@ snapshots:
       prettier: 3.8.1
       synckit: 0.11.12
 
-  eslint-plugin-functional@9.0.2(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2):
+  eslint-plugin-functional@10.0.0(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2):
     dependencies:
       '@typescript-eslint/utils': 8.62.1(eslint@9.26.0(hono@4.11.7)(jiti@2.6.1))(typescript@5.9.2)
       deepmerge-ts: 7.1.5
